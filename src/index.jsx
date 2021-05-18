@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Token from './context/token';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Token.Provider value={{ tokens: null }}>
+      <App />
+    </Token.Provider>
+
   </React.StrictMode>,
   document.getElementById('root'),
 );
