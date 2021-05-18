@@ -6,6 +6,7 @@ import {
 import Home from './Home';
 import Register from './Register';
 import SignIn from './SignIn';
+import AddProperty from './AddProperty';
 
 const MainRouter = () => (
   <Router>
@@ -18,6 +19,9 @@ const MainRouter = () => (
       </Route>
       <Route path="/signIn">
         <SignIn />
+      </Route>
+      <Route path="/property/add">
+        <AddProperty />
       </Route>
     </Switch>
   </Router>
