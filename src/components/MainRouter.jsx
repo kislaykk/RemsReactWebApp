@@ -1,12 +1,34 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-
 import {
-  BrowserRouter as Router, Switch, Route,
+  BrowserRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';
+import Tokens from '../context/token';
 import Home from './Home';
 import Register from './Register';
 import SignIn from './SignIn';
-import AddProperty from './AddProperty';
+import Topics from './Topics';
+// import AddProperty from './AddProperty';
+
+function ProtectedRoute({ children, ...rest }) {
+  const tokens = React.useContext(Tokens);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) => (tokens.tokens ? (
+        children
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/',
+            state: { from: location },
+          }}
+        />
+      ))}
+    />
+  );
+}
 
 const MainRouter = () => (
   <Router>
@@ -20,9 +42,9 @@ const MainRouter = () => (
       <Route path="/signIn">
         <SignIn />
       </Route>
-      <Route path="/property/add">
-        <AddProperty />
-      </Route>
+      <ProtectedRoute path="/user">
+        <Topics />
+      </ProtectedRoute>
     </Switch>
   </Router>
 );

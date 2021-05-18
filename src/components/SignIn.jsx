@@ -41,9 +41,7 @@ const SignIn = () => {
             accessToken: response.data.accessToken,
             refreshToken: response.data.refreshToken,
           };
-          const from = { pathname: '/protected' };
-          console.log(from);
-          console.log(location.state);
+          const from = { pathname: '/user' };
           history.replace(from);
         } else if (response.status === 200) alert(response.data.message);
       } catch (error) {

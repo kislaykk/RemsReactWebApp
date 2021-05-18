@@ -6,12 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import Token from './context/token';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Token.Provider value={{ tokens: null }}>
-      <App />
-    </Token.Provider>
 
-  </React.StrictMode>,
+  <Token.Provider value={{ tokens: null }}>
+    <App />
+  </Token.Provider>,
   document.getElementById('root'),
 );
 
