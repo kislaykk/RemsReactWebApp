@@ -42,7 +42,10 @@ export default function UserAppBar() {
 
     setState({ ...state, [anchor]: open });
   };
-  const handleClick = () => history.push('/user/property/add');
+  const handleClick = (text) => {
+    if (text === 'Add Property') history.push('/user/property/add');
+    else if (text === 'Property List') history.push('/user/property');
+  };
   const list = (anchor) => (
     <div
       role="presentation"
@@ -50,8 +53,8 @@ export default function UserAppBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Add Property'].map((text) => (
-          <ListItem button key={text} onClick={handleClick}>
+        {['Add Property', 'Property List'].map((text) => (
+          <ListItem button key={text} onClick={() => handleClick(text)}>
             <ListItemText primary={text} />
           </ListItem>
         ))}
