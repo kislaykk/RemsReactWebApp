@@ -12,6 +12,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
+import Token from '../context/token';
+import deleteProperty from '../controllers/deletProperty';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +22,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PropertyCard({ property }) {
+export default function PropertyCard({ property, stateChange }) {
   const classes = useStyles();
-
+  const [loading, setLoading] = React.useState(false);
+  const tokens = React.useContext(Token);
+  const handleDelete = async (id) => {
+    setLoading(true);
+    try {
+      await deleteProperty(tokens, { id });
+      const { changed } = stateChange;
+      setLoading(false);
+      stateChange.setChanged((changed + 1) % 2);
+    } catch (error) {
+      alert(error.message);
+      setLoading(false);
+    }
+  };
   return (
     <Card className={classes.root} key={property.id}>
       <CardActionArea>
@@ -58,10 +73,10 @@ export default function PropertyCard({ property }) {
           direction="row"
           justify="flex-end"
         >
-          <IconButton size="small" color="primary" variant="contained">
+          <IconButton size="small" color="primary" variant="contained" disabled={loading}>
             <EditIcon />
           </IconButton>
-          <IconButton size="small" color="secondary" variant="contained">
+          <IconButton size="small" color="secondary" variant="contained" disabled={loading} onClick={() => handleDelete(property.id)}>
             <DeleteIcon />
           </IconButton>
 

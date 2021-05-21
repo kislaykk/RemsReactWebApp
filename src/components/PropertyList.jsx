@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import { Typography, Container, makeStyles } from '@material-ui/core';
 import React from 'react';
@@ -10,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
 }));
-const PropertyList = ({ properties }) => {
+const PropertyList = ({ properties, stateChange }) => {
   const classes = useStyles();
-  const listItems = properties.map((property) => <PropertyCard property={property} />);
+  const listItems = properties.map((property) => <PropertyCard property={property} stateChange={stateChange} />);
   return (
     <Container maxWidth="sm" className={classes.card}>
 

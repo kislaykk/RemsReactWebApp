@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
@@ -12,6 +13,7 @@ const GetProperty = () => {
   const tokens = React.useContext(Tokens);
   const [loading, setLoading] = React.useState(true);
   const [properties, setProperties] = React.useState([]);
+  const [changed, setChanged] = React.useState(0);
   React.useEffect(async () => {
     try {
       const response = await getProperty(tokens);
@@ -20,10 +22,10 @@ const GetProperty = () => {
       console.log(error.message);
     }
     setLoading(false);
-  }, []);
+  }, [changed]);
   return (
     <div>
-      {loading ? <LoadingScreen /> : <PropertyList properties={properties} />}
+      {loading ? <LoadingScreen /> : <PropertyList properties={properties} stateChange={{ changed, setChanged }} />}
     </div>
   );
 };
