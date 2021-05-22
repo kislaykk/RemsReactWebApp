@@ -3,17 +3,21 @@ import {
   Switch,
   Route,
   useRouteMatch,
+  useLocation,
 } from 'react-router-dom';
 import UserAppBar from './UserAppBar';
 import AddProperty from './AddProperty';
 import GetProperty from './GetProperty';
+import EditProperty from './EditProperty';
+
+const useQuery = () => new URLSearchParams(useLocation().search);
 
 export default function Topics() {
   // The `path` lets us build <Route> paths that are
   // relative to the parent route, while the `url` lets
   // us build relative links.
   const { path } = useRouteMatch();
-
+  const query = useQuery();
   return (
     <div>
       <UserAppBar />
@@ -25,6 +29,9 @@ export default function Topics() {
         </Route>
         <Route path={`${path}/property/add`}>
           <AddProperty />
+        </Route>
+        <Route path={`${path}/property/edit`}>
+          <EditProperty name={query.get('name')} id={query.get('id')} state={query.get('state')} street={query.get('street')} city={query.get('city')} pin={query.get('pin')} locality={query.get('locality')} />
         </Route>
         <Route path={`${path}/property/`}>
           <GetProperty />

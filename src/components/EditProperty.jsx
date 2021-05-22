@@ -1,26 +1,48 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable max-len */
 import {
-  Button, Grid, TextField, Typography,
+  Button, Grid, TextField, Typography, Container, makeStyles,
 } from '@material-ui/core';
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
-import ContainerComponentCredential from './ContainerComponentCredential';
+import { useHistory } from 'react-router-dom';
 import Token from '../context/token';
-import addProperty from '../controllers/addProperty';
+import editProperty from '../controllers/editProperty';
 
-const AddProperty = () => {
+const useStyles = makeStyles((theme) => ({
+  card: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+}));
+const CardComponent = (props) => {
+  const classes = useStyles();
+  return (
+    <Container maxWidth="lg" className={classes.card}>
+
+      {props.children}
+
+    </Container>
+  );
+};
+const AddProperty = (props) => {
   const [loading, setLoading] = React.useState(false);
   const tokens = React.useContext(Token);
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
-      name: '',
-      street: '',
-      locality: '',
-      city: '',
-      state: '',
-      pin: '',
+      id: props.id,
+      name: props.name,
+      street: props.street,
+      locality: props.locality,
+      city: props.city,
+      state: props.state,
+      pin: props.pin,
     },
     validationSchema: Yup.object({
       name: Yup.string().min(3, 'minimum 3 and maximum 25 characters').max(25, 'minimum 3 and maximum 25 characters').required('Required'),
@@ -33,23 +55,23 @@ const AddProperty = () => {
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        const response = await addProperty(tokens, values);
+        const response = await editProperty(tokens, values);
         if (response.status === 200 && response.data) alert(response.data.message);
+        history.push('/user/property');
       } catch (error) {
         alert(error.message);
       }
       setLoading(false);
-      formik.handleReset();
     },
   });
   return (
 
-    <ContainerComponentCredential>
+    <CardComponent>
       <div>
         <HomeWorkIcon color="primary" style={{ background: 'white', fontSize: 50 }} />
       </div>
       <Typography variant="h6">
-        Add Property
+        Edit Property
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2}>
@@ -79,13 +101,13 @@ const AddProperty = () => {
           </Grid>
           <Grid item xs={12} align="center">
             <Button type="submit" color="primary" variant="contained" disabled={loading}>
-              { loading ? 'loading' : 'add'}
+              { loading ? 'loading' : 'Save'}
             </Button>
           </Grid>
         </Grid>
       </form>
 
-    </ContainerComponentCredential>
+    </CardComponent>
   );
 };
 
