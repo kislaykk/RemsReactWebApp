@@ -7,7 +7,7 @@ import {
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import HomeWorkIcon from '@material-ui/icons/HomeWork';
+import EditIcon from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
 import Token from '../context/token';
 import editProperty from '../controllers/editProperty';
@@ -68,7 +68,7 @@ const AddProperty = (props) => {
 
     <CardComponent>
       <div>
-        <HomeWorkIcon color="primary" style={{ background: 'white', fontSize: 50 }} />
+        <EditIcon color="primary" style={{ background: 'white', fontSize: 50 }} />
       </div>
       <Typography variant="h6">
         Edit Property

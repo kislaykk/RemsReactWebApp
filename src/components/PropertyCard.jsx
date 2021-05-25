@@ -11,8 +11,10 @@ import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import Grid from '@material-ui/core/Grid';
 import { useHistory } from 'react-router-dom';
+import { green } from '@material-ui/core/colors';
 import Token from '../context/token';
 import deleteProperty from '../controllers/deletProperty';
 
@@ -75,6 +77,9 @@ export default function PropertyCard({ property, stateChange }) {
           direction="row"
           justify="flex-end"
         >
+          <IconButton size="small" variant="contained" disabled={loading} onClick={() => { history.push(`/user/expense/?propertyId=${property.id}`); }}>
+            <MonetizationOnIcon style={{ color: green[500] }} />
+          </IconButton>
           <IconButton size="small" color="primary" variant="contained" disabled={loading} onClick={() => { history.push(`/user/property/edit?id=${property.id}&name=${property.name}&street=${property.address.street}&locality=${property.address.locality}&state=${property.address.state}&city=${property.address.city}&pin=${property.address.pin}`); }}>
             <EditIcon />
           </IconButton>

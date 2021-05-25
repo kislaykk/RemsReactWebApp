@@ -9,6 +9,7 @@ import UserAppBar from './UserAppBar';
 import AddProperty from './AddProperty';
 import GetProperty from './GetProperty';
 import EditProperty from './EditProperty';
+import AddnDeleteExpense from './AddnDeleteExpense';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -35,6 +36,9 @@ export default function Topics() {
         </Route>
         <Route path={`${path}/property/`}>
           <GetProperty />
+        </Route>
+        <Route path={`${path}/expense/`}>
+          <AddnDeleteExpense propertyId={query.get('propertyId')} />
         </Route>
       </Switch>
     </div>
