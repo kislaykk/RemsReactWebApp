@@ -10,6 +10,9 @@ import AddProperty from './AddProperty';
 import GetProperty from './GetProperty';
 import EditProperty from './EditProperty';
 import AddnDeleteExpense from './AddnDeleteExpense';
+import AllPropertyList from './AllPropertyList';
+import ListTenants from './ListTenants';
+import Requests from './Requests';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -34,11 +37,20 @@ export default function Topics() {
         <Route path={`${path}/property/edit`}>
           <EditProperty name={query.get('name')} id={query.get('id')} state={query.get('state')} street={query.get('street')} city={query.get('city')} pin={query.get('pin')} locality={query.get('locality')} />
         </Route>
-        <Route path={`${path}/property/`}>
+        <Route path={`${path}/property/all`}>
+          <AllPropertyList />
+        </Route>
+        <Route path={`${path}/property/tenants`}>
+          <ListTenants propertyId={query.get('propertyId')} />
+        </Route>
+        <Route path={`${path}/property`}>
           <GetProperty />
         </Route>
-        <Route path={`${path}/expense/`}>
+        <Route path={`${path}/expense`}>
           <AddnDeleteExpense propertyId={query.get('propertyId')} />
+        </Route>
+        <Route path={`${path}/requests/`}>
+          <Requests />
         </Route>
       </Switch>
     </div>

@@ -45,6 +45,8 @@ export default function UserAppBar() {
   const handleClick = (text) => {
     if (text === 'Add Property') history.push('/user/property/add');
     else if (text === 'Property List') history.push('/user/property');
+    else if (text === 'Hunt Property') history.push('/user/property/all');
+    else if (text === 'Requests') history.push('/user/requests');
   };
   const list = (anchor) => (
     <div
@@ -53,7 +55,7 @@ export default function UserAppBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Add Property', 'Property List'].map((text) => (
+        {['Add Property', 'Property List', 'Hunt Property', 'Requests'].map((text) => (
           <ListItem button key={text} onClick={() => handleClick(text)}>
             <ListItemText primary={text} />
           </ListItem>

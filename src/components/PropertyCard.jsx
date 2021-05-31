@@ -10,11 +10,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import PersonIcon from '@material-ui/icons/Person';
 import IconButton from '@material-ui/core/IconButton';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import Grid from '@material-ui/core/Grid';
 import { useHistory } from 'react-router-dom';
-import { green } from '@material-ui/core/colors';
+import { green, orange } from '@material-ui/core/colors';
 import Token from '../context/token';
 import deleteProperty from '../controllers/deletProperty';
 
@@ -77,6 +78,9 @@ export default function PropertyCard({ property, stateChange }) {
           direction="row"
           justify="flex-end"
         >
+          <IconButton size="small" color="secondary" variant="contained" disabled={loading} onClick={() => { history.push(`/user/property/tenants?propertyId=${property.id}`); }}>
+            <PersonIcon style={{ color: orange[500] }} />
+          </IconButton>
           <IconButton size="small" variant="contained" disabled={loading} onClick={() => { history.push(`/user/expense/?propertyId=${property.id}`); }}>
             <MonetizationOnIcon style={{ color: green[500] }} />
           </IconButton>

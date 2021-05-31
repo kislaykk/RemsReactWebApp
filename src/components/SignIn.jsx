@@ -20,9 +20,9 @@ const SignIn = () => {
   const tokens = React.useContext(Tokens);
   const formik = useFormik({
     initialValues: {
-      email: 'test2@gmail.com',
+      email: 'kislay1@gmail.com',
 
-      password: 'Done4ever',
+      password: 'what4567',
 
     },
     validationSchema: Yup.object({
