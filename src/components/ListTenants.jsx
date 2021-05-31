@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import getTenants from '../controllers/getTenants';
 import removeTenant from '../controllers/removeTenant';
+import getClientDetails from '../controllers/getClientDetails';
 
 import Token from '../context/token';
 
@@ -34,6 +35,20 @@ const TenantList = ({ tenants, lo, setLo }) => {
             }}
           >
             Remove tenant
+          </Button>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={async () => {
+              try {
+                const { details } = await getClientDetails(tenant.leasedById);
+                alert(`name:${details.name}\nemail:${details.email}\nphoneNo:${details.phoneNo}\nbased at:${details.basedAt}`);
+              } catch (error) {
+                alert(error.message);
+              }
+            }}
+          >
+            Details
           </Button>
         </li>
       ))}

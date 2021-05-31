@@ -90,7 +90,14 @@ export default function UserAppBar() {
           <Typography variant="h6" className={classes.title}>
             Dashboard
           </Typography>
-          <IconButton color="inherit"><PowerSettingsNewIcon /></IconButton>
+          <IconButton
+            color="inherit"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            <PowerSettingsNewIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>

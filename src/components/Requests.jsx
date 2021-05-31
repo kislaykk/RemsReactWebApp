@@ -6,6 +6,7 @@ import { Button, makeStyles } from '@material-ui/core';
 import getAllRequestsForAClient from '../controllers/getAllRequestsForAClient';
 import rejectRequest from '../controllers/rejectRequest';
 import acceptRequest from '../controllers/acceptRequest';
+import getClientDetails from '../controllers/getClientDetails';
 import Token from '../context/token';
 import LoadingScreen from './LoadingScreen';
 
@@ -44,7 +45,10 @@ const ListItems = ({ req1, lo, setLo }) => {
             Reject
           </Button>
           <Button
-            color="primary"
+            style={{
+              backgroundColor: 'green',
+              color: 'white',
+            }}
             variant="contained"
             onClick={async () => {
               try {
@@ -59,6 +63,20 @@ const ListItems = ({ req1, lo, setLo }) => {
             }}
           >
             Accept
+          </Button>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={async () => {
+              try {
+                const { details } = await getClientDetails(re.request.clientId);
+                alert(`name:${details.name}\nemail:${details.email}\nphoneNo:${details.phoneNo}\nbased at:${details.basedAt}`);
+              } catch (error) {
+                alert(error.message);
+              }
+            }}
+          >
+            Details
           </Button>
         </li>
       ))}
