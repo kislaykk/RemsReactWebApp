@@ -13,6 +13,7 @@ import AddnDeleteExpense from './AddnDeleteExpense';
 import AllPropertyList from './AllPropertyList';
 import ListTenants from './ListTenants';
 import Requests from './Requests';
+import ClientHome from './ClientHome';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -28,7 +29,7 @@ export default function Topics() {
 
       <Switch>
         <Route exact path={path}>
-          <h3>Home</h3>
+          <ClientHome />
           {/* add the money component here -which shows the moeny made and all */}
         </Route>
         <Route path={`${path}/property/add`}>

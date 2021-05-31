@@ -12,17 +12,20 @@ import getRequestForProperty from './getRequestForProperty';
 // };
 const getRequests = (token, { property }) => new Promise((resolve, reject) => {
   const requestList = [];
-  for (let i = 0; i < property.length; i++) {
-    getRequestForProperty(token, property[i].id)
-      .then((requests) => {
-        for (let j = 0; j < requests.request.length; j++) {
-          requestList.push({
-            request: requests.request[j],
-            property: property[i].name,
-          });
-        }
-        if (i + 1 === property.length) resolve(requestList);
-      });
+  if (!property.length) resolve(requestList);
+  else {
+    for (let i = 0; i < property.length; i++) {
+      getRequestForProperty(token, property[i].id)
+        .then((requests) => {
+          for (let j = 0; j < requests.request.length; j++) {
+            requestList.push({
+              request: requests.request[j],
+              property: property[i].name,
+            });
+          }
+          if (i + 1 === property.length) resolve(requestList);
+        });
+    }
   }
 });
 const getAllRequestsForAClient = async (token) => new Promise((resolve, reject) => {
